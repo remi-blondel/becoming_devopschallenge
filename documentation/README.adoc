@@ -1,0 +1,4 @@
+= Work in Markdown or ASCIIDOC
+
+* https://www.markdownguide.org/basic-syntax/
+* https://asciidoctor.org/docs/asciidoc-vs-markdown/

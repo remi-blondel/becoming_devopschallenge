@@ -1,0 +1,64 @@
+= Assessment
+// URIs:
+:uri-becoming-repo: https://github.ibm.com/becoming-devOps
+:library: Asciidoctor
+:idprefix:
+:imagesdir: images
+:experimental:
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+Welcome to the *Becoming-DevOps Advanced Learning Path* by ISCP Container Platform. :fire: 
+
+== New client! 
+
+*ISCP has recently won a new Deal with an Important Shop in Amsterdam. This client has an important Web Application deployed in their On-Premise cluster and wants to migrate it to the Cloud.*
+
+image::logo-socks.png[align="center"]
+
+The client has required us to deploy an *entire environment to supply their developers with enough tools for monitoring, log management, continuous deployment and access via the Internet to all microservices*. 
+
+With these requirements, our Architect has created some tasks in Jira Software according to the following information.
+
+= Client Application
+The client wants to deploy an application which contains a Frontend (proxy), Backend and some microservices to integrate the application. It is not important which containers are used by the applications but the following customer requirements:
+
+ * Have the *index patterns in the Elasticsearch* (one per day, persistence and rotation logs per week). 
+ * *Monitor all applications* by namespace occupation, CPU Usage, Memory Usage and Network consumes. 
+ * Have access to the application through the following ingress URL 
+ ** `*http(s)://shop-socks:<port>*`
+ * Have access to the Dashboard through the following access: 
+ ** `*http(s)://shop-socks-[kibana|elasticsearch|prometheus|grafana|jenkins]*`
+
+=== Client Application Structure
+ * The following link has all the `.yaml` files of the client application >> https://github.ibm.com/Alberto-Crego-Matas/becoming-devops/tree/master/shock-shop[LINK]
+
+_source: https://microservices-demo.github.io/ (Open Source Application Example)_
+
+=== Help guide
+ * Infrastructure and help to finish the assessment >> https://github.ibm.com/Alberto-Crego-Matas/becoming-devops/blob/master/AssestmentISCP-requirements.adoc#elements-provide-by-iscp[LINK]
+ * Information and requirements about the Task >> https://github.ibm.com/Alberto-Crego-Matas/becoming-devops/blob/master/AssestmentISCP-requirements.adoc#info-and-requirementes[LINK]
+
+
+---
+
+[IMPORTANT]
+_Not every proposed task must be completed but the DevOps team must be able to reach at least the knowledge of each part to certify that they can operate with the platform_
+
+---
+
+= :fire:  DEMO TIME!!! :fire: 
+
+image::demoTime.gif[float="right", align="center"]
+
+After the deadline, the the DevOps team *should do a Demo to the ISCP Spain Team (as though it was a client) to explain the functionalities, deployments, tasks, problems and functions from this project.* 
+
+The ISCP team could ask any questions about monitoring, logging, CI/CD, Kubernetes to know everything about the architecture, infrastructure and development of the solution. 
+
+* Duration 30-45 minutes

@@ -1,0 +1,152 @@
+= Elements provide by ISCP: 
+// URIs:
+:uri-becoming-repo: https://github.ibm.com/becoming-devOps
+:library: Asciidoctor
+:idprefix:
+:imagesdir: images
+:experimental:
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+* *Git-Repository* - This repo you will use to upload all the information, documentation and everything about this assessment. 
+
+* *4 virtual machines* 
+ ** IP (master):  158.176.85.66
+ ** IP (worker1): 158.176.85.75
+ ** IP (worker2): 158.176.85.71
+ ** IP (worker3): 158.176.85.78
+ 
+      All OS are Ubuntu 16.04 Minimal LTS 64 Bits.
+       
+* *Server NFS:*
+ ** IP: fsf-lon0601c-fz.adn.networklayer.com:/IBM02SEV1670963_3/data01
+ 
+* *Folder in this branch to attach the documentation*: 
+ ** becomingDevops/AssestmentISCP/documentation   
+ ** Use *Markdown or ASCIDOC* 
+
+[TIP]
+The documentation not necessary to be extremly detailed, this only resume, commands, actions, problems, known issues, etc
+
+* *Help?*
+  ** Please calm!!! https://www.youtube.com/watch?v=2Q_ZzBGPdqE[Link]
+  ** Use your best friend!! https://google.com[Google]
+  ** Finally, you can use the follow Slack Channel to ask your questions #becoming_devopschallenge
+  
+---
+
+= Info and requirementes
+
+=== Installing the cluster: 
+
+The first requirement is to deploy and configure a Kubernetes Cluster and to achieve this we provide you with four virtual machines. Use them to create a cluster with the following configuration: 
+
+ * Configure a Kubernetes cluster as 1 Master and 3 workers. 
+ * Install one Network provider to allow the communication between nodes and pods. 
+ * Configure the NFS to mount in _/srv/sharedStorage_
+ * When you finish the installation you should have a kubeconfig file to use the cluster. 
+
+[TIP]
+====
+* Document all installation method, programs used to do it and any other useful information that other team could need to know to replicate the installation process
+====
+
+=== Connectivity
+There are many ways to access to our ISCP team and from the client network, but the easier and beneficial way to the client is using the Ingress Controller. This is a proxy which can route from external IP the traffic to specific service in Kubernetes. With this information you should do: 
+
+ - Deploy an Ingress Controller: the standard configuration is enough but you must use the Kubernetes objects. 
+ - Prepare an Ingress Object which can route the traffic from Internet to every next application. 
+ 
+[TIP]
+====
+ - Explain the connectivity in one slide.
+ - Document the architecture, all installation method, programs used to do it and any other useful information that other team could need to know to replicate it.
+====
+
+=== Persistence
+
+In this point, you should configure the persistence based in the NFS Server, there some options:
+
+ - Static PV and PVC attached in the deployments like componentes in Kubernetes.
+ - Use a `nfs-server-provisioner` _(there are a stable version in Helm)_
+
+[TIP]
+====
+ - Prepare the objects or the `storageClass` for auto-provisioning in every application. 
+====
+
+=== CI/CD Environment - Jenkins 
+
+The CI/CD lifecycle management is one of the most important points. In this step, you will develop a CI/CD application: in this case, you have to use Jenkins. Deploy it with the following requirements: 
+
+ * Install and configure properly a Tiller from Helm. This is the way to install quickly the next application. 
+ * Install the last Jenkins image, the stable version from Helm. 
+
+After you finish the installation: 
+
+ * Configure the access as matrix user. Using this option you can configure different users with different permissions. 
+ * Create 2 users: one of them with the possibility of creating a new job and another one with only the possibility of launching jobs. 
+ * Create some jobs to try, for example execute an Ansible Script, send notification Slack, send Email, deploy a Kubernetes yaml, execute commands, Build a Docker...
+
+ * Expose to the Internet this Jenkins with an Ingress Objects. 
+
+[TIP]
+====
+  - Deploy jobs and expose the service
+  - Architecture, installation method, programs that you use it and any other information useful that other team can replicate the installation process
+====
+ 
+=== Logging Stack
+
+The purpose of this part is to create a complete stack to collect, manage and save the logs of the application. To make this possible you will use the Elastic Stack with this configuration: 
+
+ * Create *Elasticsearch Stack*: you can select the minimum configuration with three instances.
+ * Configure the *persistence in the NFS* of the data. 
+ * Set it up so all applications send the logs to the Elasticsearch and define the strategic with the index management.  _Justify your decision_ 
+ * Expose the Elasticsearch DDBB to the Internet to consult the API. 
+ 
+---
+
+ * Add a *Kibana Instance* to visualize the documents. 
+ * Create a dashboard to visualize and search for information from application logs. 
+ * Expose the Kibana dashboard to the Internet. 
+
+ * *Parse the information* to increase the data that you have. _For example, if you have an Nginx, obtain in differents fields the status code of petitions, time request, path, etc_ (you can use another application from Elastic). 
+
+ * Configure the logs rotate index for 1 week (_use external applications if you need it_)
+
+
+[TIP]
+====
+ * Deploy the application and create Dashboard to analizy in real time the information.
+ * Architecture, installation method, programs that you use it and any other information useful that other team can replicate the installation process
+====
+
+=== Monitoring Stack + Grafana
+
+In this step, you must set up a basic stack to monitor the nodes, pods, requirements in the cluster. You have to:
+
+  * Deploy *Prometheus Stack*. Configure auto-scraping or direct scraping to exporters. 
+  * Deploy the *Alertmanager* application to notify the incident based on the defined rules. You can configure different receivers: Slack Webhook, Email, Pagerduty (free account), etc. 
+
+---
+
+  * Connect the *Prometheus with the exporters* of Jenkins, Elasticsearch and Ingress Controller, collect theis metrics and configure some alerts for this componentes. 
+
+After you have all the metrics in Prometheus, you should to configure an application to visualize this information. Grafana is your friend :)
+
+  * *Deploy a Grafana and connect to Prometheus*
+  * Generate useful *Dashboards* to visualize Kubernetes data about the Cluster, Nodes, pods, performance, CPU Usage, RAM Usage...
+
+ 
+[TIP]
+====
+ * Visualize Dashboards with Prometheus metrics. 
+ * Architecture, installation method, programs that you use it and any other information useful that other team can replicate the installation process
+====
